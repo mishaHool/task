@@ -7,6 +7,8 @@ let tittle = document.getElementsByClassName('tittle')[0];
 let desc = document.getElementsByClassName('desc')[0];
 let prior = document.getElementsByClassName('prior')[0];
 let triTochki;
+let prim = document.getElementById('sort-pri')
+let strFil = document.getElementById('search')
 let menuVipad;
 let done;
 let edit;
@@ -17,6 +19,7 @@ class fileSystem{
     this.taskss = []
     }
     addTask(title, desc, prior){
+        this.refresh()
         let data = Date.now();
         this.taskss.push({
             index: data,
@@ -24,8 +27,18 @@ class fileSystem{
             desc: desc,
             prio: prior,
             done: false,
-            hiddened: false,
+            hiddened: false, 
         });
+    }
+    addHid(){
+        for(i=0;i<this.taskss.length;i++){
+            this.taskss[i].hiddened = false;
+        }
+        showTasks(this.taskss)
+    }
+    refresh(){
+        let css = document.getElementById('css');
+        if(css!=null)tasks.removeChild(css);
     }
     doneTask(ind){
         for(i=0;i<this.taskss.length;i++){
@@ -48,12 +61,24 @@ class fileSystem{
         for(i=0;i<this.taskss.length;i++){
             let a = this.taskss[i];
             if(a.index == index){
-                this.taskss.splice(i, 1)
+                this.taskss.splice(i,1);
                 showTasks(this.taskss)
             }
         }
     }
-}
+    makeFiltredPrio(prio){
+            for(i=0;i<this.taskss.length;i++){
+                let a = this.taskss[i];
+                if(a.prio != prio){
+                    a.hiddened = true;
+                }else{
+                    a.hiddened = false;
+                }
+                }
+                showTasks(this.taskss)
+                }
+    }
+    
 
 let file = new fileSystem();
 
@@ -74,7 +99,16 @@ cancel.addEventListener('click', function(){
     topper.style.display = 'none';
     tasks.style.display = 'flex'
 });
-
+prim.addEventListener('change', function(){
+    if(prim.value == 'not-select'){
+        file.addHid()
+    }else{
+        file.makeFiltredPrio(prim.value)
+    }
+})
+// strFil.addEventListener('keyup', function(){
+//     showTasks(file.taskss, strFil.value)
+// })
 
 function instruments(){
     triTochki = document.getElementsByClassName('tri-tochki');
@@ -118,7 +152,8 @@ function showTasks(arr){
         taske.classList.add('task')
 
         if(arr[i].done == true) taske.classList.add('backgroundGray');
-
+        if(arr[i].hiddened == true) taske.classList.add('filtred');
+        
         let tit = document.createElement('div');
         tit.classList.add('title');
         tit.innerText = arr[i].title;
