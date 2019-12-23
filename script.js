@@ -8,7 +8,9 @@ let desc = document.getElementsByClassName('desc')[0];
 let prior = document.getElementsByClassName('prior')[0];
 let triTochki;
 let prim = document.getElementById('sort-pri')
+let donem = document.getElementById('sort');
 let strFil = document.getElementById('search')
+let upd = document.getElementsByClassName('upd')[0];
 let menuVipad;
 let done;
 let edit;
@@ -27,7 +29,7 @@ class fileSystem{
             desc: desc,
             prio: prior,
             done: false,
-            hiddened: false, 
+            hiddened: false,
         });
     }
     addHid(){
@@ -49,11 +51,25 @@ class fileSystem{
             }
         }
     }
-    editTask(ind, titlle, deesc, pria){
+    editTask(ind){
+        console.log(ind)
         for(i=0;i<this.taskss.length;i++){
             let t = this.taskss[i];
             if(t.index == ind){
-
+                topper.style.display = 'flex'
+                tasks.style.display = 'none';
+                apply.classList.add('removed');
+                upd.classList.remove('removed');
+                tittle.value = t.title;
+                desc.value = t.desc;
+                prior.value = t.prio;
+                upd.addEventListener('click', function(){
+                    file.addTask(tittle.value, desc.value, prior.value);
+                    file.removeTask(ind);
+                    showTasks(file.taskss)
+                    topper.style.display = 'none';
+                    tasks.style.display = 'flex';
+                })
             }
         }
     }
@@ -76,16 +92,37 @@ class fileSystem{
                 }
                 }
                 showTasks(this.taskss)
-                }
     }
-    
+    makeFiltredDone(){
+            for(i=0;i<this.taskss.length;i++){
+                let a = this.taskss[i];
+                if(a.done != true){
+                    a.hiddened = true;
+                }else{
+                    a.hiddened = false;
+                }
+            }
+        showTasks(this.taskss)
+    }
+
+
+    }
 
 let file = new fileSystem();
 
-
+donem.addEventListener('change', function(){
+    if(donem.value == 'all'){
+        file.addHid()
+    }else{
+        file.makeFiltredDone(donem.value)
+    }
+})
 openC.addEventListener('click', function(){
+    clearData()
     topper.style.display = 'flex';
     tasks.style.display = 'none';
+    upd.classList.add('removed');
+    if(apply.classList.contains('removed')) apply.classList.remove('removed');
 })
 apply.addEventListener('click', function(){
     file.addTask(tittle.value, desc.value, prior.value);
@@ -106,9 +143,9 @@ prim.addEventListener('change', function(){
         file.makeFiltredPrio(prim.value)
     }
 })
-// strFil.addEventListener('keyup', function(){
-//     showTasks(file.taskss, strFil.value)
-// })
+strFil.addEventListener('keyup', function(){
+    showTasks(file.taskss, strFil.value)
+})
 
 function instruments(){
     triTochki = document.getElementsByClassName('tri-tochki');
@@ -139,9 +176,16 @@ function instruments(){
             file.removeTask(d1);
         })
     }
+    for(i=0;i<edit.length;i++){
+        let e = edit[i];
+        e.addEventListener('click', function(){
+            let e1 = e.getAttribute('data-index');
+            file.editTask(e1);
+        })
+    }
     }
     
-function showTasks(arr){
+function showTasks(arr, str=''){
     let a = document.getElementById('css')
     if(a != null) a.remove();
     let s = document.createElement('div')
@@ -153,7 +197,8 @@ function showTasks(arr){
 
         if(arr[i].done == true) taske.classList.add('backgroundGray');
         if(arr[i].hiddened == true) taske.classList.add('filtred');
-        
+        if(arr[i].title.includes(str)==false&&str!='') continue;
+
         let tit = document.createElement('div');
         tit.classList.add('title');
         tit.innerText = arr[i].title;
