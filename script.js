@@ -5,12 +5,12 @@ let cancel = document.getElementsByClassName('cancel')[0];
 let apply = document.getElementsByClassName('apply')[0];
 let tittle = document.getElementsByClassName('tittle')[0];
 let desc = document.getElementsByClassName('desc')[0];
-let prior = document.getElementsByClassName('prior')[0];
+let prior = document.getElementById('prior');
 let triTochki;
 let prim = document.getElementById('sort-pri')
 let donem = document.getElementById('sort');
 let strFil = document.getElementById('search')
-let upd = document.getElementsByClassName('upd')[0];
+let upd = document.getElementsByClassName('update')[0];
 let menuVipad;
 let done;
 let edit;
@@ -23,6 +23,7 @@ class fileSystem{
     addTask(title, desc, prior){
         this.refresh()
         let data = Date.now();
+        if(title.length != 0 && desc.length != 0){
         this.taskss.push({
             index: data,
             title: title,
@@ -31,6 +32,9 @@ class fileSystem{
             done: false,
             hiddened: false,
         });
+    }else{
+        alert(new Error('поле title и description должны быть заполнены'));
+    }
     }
     addHid(){
         for(i=0;i<this.taskss.length;i++){
@@ -122,7 +126,6 @@ openC.addEventListener('click', function(){
     topper.style.display = 'flex';
     tasks.style.display = 'none';
     upd.classList.add('removed');
-    if(apply.classList.contains('removed')) apply.classList.remove('removed');
 })
 apply.addEventListener('click', function(){
     file.addTask(tittle.value, desc.value, prior.value);

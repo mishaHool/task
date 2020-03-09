@@ -5,71 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-        <div class="topper-div">
-                <form action="#" method="post" class="topper">
-                    <div >Title:<br><input type="text" name="title" class="tittle"></div>
-                    <div >Description:<br><textarea name="description" id="" cols="30" rows="10" class="desc"></textarea></div>
-                    <div >Priority:<br><select name="priority" id="" class="prior">
-                            <option>easy</option>
-                            <option>middle</option>
-                            <option>hard</option>    
-                    </select>
-                    <div class="buttons">
-                        <input type="button" value="cancel" class="cancel">
-                        <input type="button" value="apply" class="apply">
-                        <input type="button" value="update" class="upd">
-                    </div>
-                </div>
-                </form>
-            </div>
-    <div class="in-it">
-    <form action="#" method="POST" class="form">
-        <div class="searchh">
-        <i class="material-icons">search</i>
-        <input type="text" id="search" class="search" placeholder="enter text for search">
-        </div>
-        <div class="ddiv">
-        <select name="sort" id="sort">
-                <option value="all">all</option>
-                <option value="done">done</option>
+    <div class="topper-div">
+        <form action="Post" class="topper">
+            Title:<br><input type="text" class="tittle"><br>
+            Description:<br><textarea name="" id="" class="desc" cols="30" rows="10"></textarea><br>
+            Priority:<br><select name="priorit" id="prior">
+                <option value="easy">easy</option>
+                <option value="middle">middle</option>
+                <option value="hard">hard</option>
             </select>
-            
-            <select name="difficult" id="sort-pri">
-                <option value="not-select" id="not-select">not select</option>
-                <option value="easy" id="easy">easy</option>
-                <option value="middle" id="mid">middle</option>
-                <option value="hard" os="hard">hard</option>
-            </select>
-            <input type="button" value="create" class="butt">
-        </div>
-    </form>
-    <div id="tasks">
-        <!-- <div id="css">
-        <div class="task">
-            <div class="title">Lorem Ipsum</div>
-            <div class="descr">Lorem ipsum dolor sit amet</div>
-
-            <div class="bott">
-            <div class="prior">easy</div>
-            <div class="menu">
-                <div class="tri-tochki">...</div>
-                <div class="menu-vipad">
-                    <div class="arrow-up"></div>
-                    <div class="done">done</div>
-                    <div class="edit">edit</div>
-                    <div class="del">delete</div>
-                </div>
+            <div class="buttons">
+                <input type="button" value="cancel" class="cancel">
+                <input type="button" value="apply" class="apply">
+                <input type="button" value="update" class="update">
             </div>
-            </div>
-            </div>
-        </div> -->
-        </div>
+        </form>
     </div>
+    <div class="in-it">
+        <form action="POST" class="form">
+            <div class="searchh">
+                <i class="material-icons">search</i>
+                <input type="text" id="search" placeholder="enter text">
+            </div>
+            <select name="" id="sort-pri">
+                <option value="not-select">not select</option>
+                <option value="easy">easy</option>
+                <option value="middle">middle</option>
+                <option value="hard">hard</option>
+            </select>
+            <select name="" id="sort">
+            <option value="all">all</option>
+            <option value="done">done</option>
+            </select>
+            <input type="button" class="butt" value="create">
+        </form>
+    </div>
+    <div id="tasks">
+
     </div>
     <script src="script.js"></script>
 </body>

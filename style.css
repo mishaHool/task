@@ -15,11 +15,18 @@ body{
     height: 36px;
 }
 .material-icons{
-    position: absolute;
     margin-top: 4px;
+}
+#search{
+    height: 30px;
+    width: 199px;
 }
 .form{
     display: flex;
+    align-items: center;
+}
+.form select{
+    height: 17px;
 }
 .butt{
     border-radius: 300px;
@@ -61,13 +68,19 @@ body{
     height: 206px;
     margin-top: 50px;
 }
+.update{
+    display: none;
+}
 .title{
     border: 1px solid black;
-    margin-top: 7px;
+    height: 20px;
+    width: 200px;
 }
 .descr{
     border: 1px solid red;
-    margin-top: 43px;
+    margin-top: 20px;
+    height: 20px;
+    width: 200px;
 }
 .bott{
     display: flex;
@@ -78,8 +91,8 @@ body{
 .menu{
     width: 30px;
     position: absolute;
-    right: 1px;
-    bottom: -72px;
+    right: 0;
+    bottom: -70px;
 }
 .tri-tochki{
     border: 1px solid black;
